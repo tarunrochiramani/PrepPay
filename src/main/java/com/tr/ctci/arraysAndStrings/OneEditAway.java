@@ -1,4 +1,4 @@
-package com.tr.ctci;
+package com.tr.ctci.arraysAndStrings;
 
 public class OneEditAway {
     public boolean isOneEditAway(String s1, String s2) {

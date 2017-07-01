@@ -1,4 +1,4 @@
-package com.tr.ctci;
+package com.tr.ctci.arraysAndStrings;
 
 public class PalindromePermutation {
     public boolean isPalindromePermutation(String input) {

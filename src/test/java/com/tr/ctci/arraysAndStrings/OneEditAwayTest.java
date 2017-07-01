@@ -1,6 +1,6 @@
-package com.tr.ctci;
+package com.tr.ctci.arraysAndStrings;
 
-import org.junit.Assert;
+import com.tr.ctci.arraysAndStrings.OneEditAway;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
