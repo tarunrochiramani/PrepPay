@@ -1,5 +1,7 @@
 package com.tr.ds.services;
 
+import java.util.LinkedList;
+
 import com.tr.ds.LinkedListNode;
 import com.tr.exceptions.InvalidLinkedListInput;
 
@@ -82,5 +84,22 @@ public class LinkedListService {
             current = nextNode;
         }
         return previous;
+    }
+
+    public <T>LinkedListNode<T> findMiddleNode(LinkedListNode<T> head) throws InvalidLinkedListInput {
+        if (head == null) {
+            throw new InvalidLinkedListInput("Invalid List");
+        }
+
+        LinkedListNode<T> slow = head, fast = head;
+
+        while (fast != null) {
+            fast = fast.getNext();
+            if (fast != null && fast.getNext() != null) {
+                slow = slow.getNext();
+                fast = fast.getNext();
+            }
+        }
+        return slow;
     }
 }

@@ -112,6 +112,28 @@ public class LinkedListServiceTest {
         linkedListService.reverse(null);
     }
 
+    @Test
+    public void canFindMiddleNodeForOddSizeList() throws InvalidLinkedListInput {
+        Integer[] inputData = new Integer[] {1, 2, 3, 4, 5};
+        LinkedListNode head = linkedListService.create(inputData);
+
+        LinkedListNode middleNode = linkedListService.findMiddleNode(head);
+
+        assertNotNull(middleNode);
+        assertEquals(3, middleNode.getData());
+    }
+
+    @Test
+    public void canFindMiddleNodeForEvenSizeList() throws InvalidLinkedListInput {
+        Integer[] inputData = new Integer[] {1, 2, 3, 4};
+        LinkedListNode head = linkedListService.create(inputData);
+
+        LinkedListNode middleNode = linkedListService.findMiddleNode(head);
+
+        assertNotNull(middleNode);
+        assertEquals(2, middleNode.getData());
+    }
+
     private <T> void verifyInputWithList(Integer[] inputData, LinkedListNode<T> head) {
         int count = 0;
         LinkedListNode<T> current = head;
