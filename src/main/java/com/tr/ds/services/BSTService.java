@@ -1,7 +1,10 @@
 package com.tr.ds.services;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tr.ds.BSTNode;
 import com.tr.exceptions.InvalidInputException;
@@ -159,6 +162,30 @@ public class BSTService {
             printPaths(treeNode.getRight(), nodesVisited, stringBuilder);
         }
         nodesVisited.remove(treeNode);
+    }
+
+    public Map<Integer, List<BSTNode>> listOfNodesAtEachLayer(BSTNode root) throws InvalidInputException {
+        if (root == null) {
+            throw new InvalidInputException();
+        }
+
+        Map<Integer, List<BSTNode>> listOfNodesByDepth = new HashMap<Integer, List<BSTNode>>();
+        listOfNodesAtEachLayer(root, 1, listOfNodesByDepth);
+        return listOfNodesByDepth;
+
+    }
+
+    private void listOfNodesAtEachLayer(BSTNode treeNode, int depth, Map<Integer, List<BSTNode>> listOfNodesByDepth) {
+        if (treeNode == null) {
+            return;
+        }
+
+        if (!listOfNodesByDepth.containsKey(depth)) {
+            listOfNodesByDepth.put(depth, new ArrayList<BSTNode>());
+        }
+        listOfNodesByDepth.get(depth).add(treeNode);
+        listOfNodesAtEachLayer(treeNode.getLeft(), depth + 1, listOfNodesByDepth);
+        listOfNodesAtEachLayer(treeNode.getRight(), depth + 1, listOfNodesByDepth);
     }
 
     public boolean sameTree(BSTNode treenodeA, BSTNode treeNodeB) {

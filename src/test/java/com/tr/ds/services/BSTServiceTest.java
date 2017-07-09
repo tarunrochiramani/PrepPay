@@ -1,5 +1,8 @@
 package com.tr.ds.services;
 
+import java.util.List;
+import java.util.Map;
+
 import com.tr.ds.BSTNode;
 import com.tr.exceptions.InvalidInputException;
 import org.junit.Test;
@@ -124,6 +127,17 @@ public class BSTServiceTest {
         assertFalse(service.sameTree(root, root1));
     }
 
+
+    @Test
+    public void canGetListOfNodesAtEachDepth() throws InvalidInputException {
+        int[] values = new int[] {7, 3, 9, 2, 4, 8, 10, 5 ,1};
+        BSTNode root = service.createTree(values);
+
+        Map<Integer, List<BSTNode>> listOfNodesAtEachLayer = service.listOfNodesAtEachLayer(root);
+
+        assertNotNull(listOfNodesAtEachLayer);
+        assertFalse(listOfNodesAtEachLayer.isEmpty());
+    }
 
 
     private int assertIsBST(BSTNode root) {
