@@ -3,9 +3,11 @@ package com.tr.ds.services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.tr.ctci.linklist.Palindrome;
 import com.tr.ds.BSTNode;
 import com.tr.exceptions.InvalidInputException;
 
@@ -173,6 +175,62 @@ public class BSTService {
         listOfNodesAtEachLayer(root, 1, listOfNodesByDepth);
         return listOfNodesByDepth;
 
+    }
+
+    public List<List<Integer>> getAllBSTSequences(BSTNode root) {
+        if (root == null) {
+            return new ArrayList<List<Integer>>();
+        }
+
+        List<List<Integer>> sequences = new ArrayList<List<Integer>>();
+
+        List<List<Integer>> leftSequences = getAllBSTSequences(root.getLeft());
+        List<List<Integer>> rightSequences = getAllBSTSequences(root.getRight());
+
+        if (leftSequences.isEmpty() && rightSequences.isEmpty()) {
+            List<Integer> aSequence = new ArrayList<Integer>();
+            aSequence.add(root.getValue());
+            sequences.add(aSequence);
+            return sequences;
+        }
+
+        if (leftSequences.isEmpty()) {
+            for (List<Integer> rightSequence : rightSequences) {
+                List<Integer> aSequence = new ArrayList<Integer>();
+                aSequence.add(root.getValue());
+                aSequence.addAll(rightSequence);
+                sequences.add(aSequence);
+            }
+        } else if (rightSequences.isEmpty()) {
+            for (List<Integer> leftSequence : leftSequences) {
+                List<Integer> aSequence = new ArrayList<Integer>();
+                aSequence.add(root.getValue());
+                aSequence.addAll(leftSequence);
+                sequences.add(aSequence);
+            }
+        } else {
+            for (List<Integer> leftSequence : leftSequences) {
+                for (List<Integer> rightSequence : rightSequences) {
+                    List<Integer> aSequence = new ArrayList<Integer>();
+                    aSequence.add(root.getValue());
+                    aSequence.addAll(leftSequence);
+                    aSequence.addAll(rightSequence);
+                    sequences.add(aSequence);
+                }
+            }
+
+            for (List<Integer> rightSequence : rightSequences) {
+                for (List<Integer> leftSequence : leftSequences) {
+                    List<Integer> aSequence = new ArrayList<Integer>();
+                    aSequence.add(root.getValue());
+                    aSequence.addAll(rightSequence);
+                    aSequence.addAll(leftSequence);
+                    sequences.add(aSequence);
+                }
+            }
+        }
+
+        return sequences;
     }
 
     private void listOfNodesAtEachLayer(BSTNode treeNode, int depth, Map<Integer, List<BSTNode>> listOfNodesByDepth) {

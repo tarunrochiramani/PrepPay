@@ -139,6 +139,17 @@ public class BSTServiceTest {
         assertFalse(listOfNodesAtEachLayer.isEmpty());
     }
 
+    @Test
+    public void canGetAllSequences() throws InvalidInputException {
+        int[] values = new int[] {7, 3, 9, 2, 4, 8, 10, 5 ,1};
+        BSTNode root = service.createTree(values);
+
+        List<List<Integer>> allBSTSequences = service.getAllBSTSequences(root);
+
+        assertNotNull(allBSTSequences);
+        assertFalse(allBSTSequences.isEmpty());
+    }
+
 
     private int assertIsBST(BSTNode root) {
         int countOfNodes = 0;
