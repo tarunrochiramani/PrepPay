@@ -1,18 +1,20 @@
 package com.tr.ds.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
-import com.tr.ctci.linklist.Palindrome;
 import com.tr.ds.BSTNode;
 import com.tr.exceptions.InvalidInputException;
 
 public class BSTService {
+    private static int count = 0;
+    private Random random = new Random();
+
     public BSTNode createTree(int[] values) throws InvalidInputException {
+        count = 0;
         BSTNode head = null;
 
         for(int value : values) {
@@ -24,6 +26,7 @@ public class BSTService {
             }
         }
 
+        count++;
         return head;
     }
 
@@ -42,8 +45,11 @@ public class BSTService {
             }
         }
 
+        count++;
         BSTNode newNode = new BSTNode();
         newNode.setValue(value);
+        newNode.setOrder(count);
+
 
         if (value <= previous.getValue()) {
             previous.setLeft(newNode);
@@ -231,6 +237,43 @@ public class BSTService {
         }
 
         return sequences;
+    }
+
+    public BSTNode getRandomNode(BSTNode root) throws InvalidInputException {
+        if (root == null) {
+            throw new InvalidInputException();
+        }
+        int randomPosition = random.nextInt(count-1);
+
+        return getNodeAtPosition(root, randomPosition);
+    }
+
+    private BSTNode getNodeAtPosition(BSTNode root, int randomPosition) {
+        if (root == null) {
+            return null ;
+        }
+
+        if (root.getOrder() == randomPosition) {
+            return root;
+        }
+
+        BSTNode nodeAtPosition = null;
+        if (root.getLeft()!=null && root.getLeft().getOrder() <= randomPosition) {
+            nodeAtPosition = getNodeAtPosition(root.getLeft(), randomPosition);
+            if (nodeAtPosition != null) {
+                return nodeAtPosition;
+            }
+        }
+
+        if (root.getRight() != null && root.getRight().getOrder() <= randomPosition) {
+            nodeAtPosition = getNodeAtPosition(root.getRight(), randomPosition);
+            if (nodeAtPosition != null) {
+                return nodeAtPosition;
+            }
+        }
+
+        return nodeAtPosition;
+
     }
 
     private void listOfNodesAtEachLayer(BSTNode treeNode, int depth, Map<Integer, List<BSTNode>> listOfNodesByDepth) {

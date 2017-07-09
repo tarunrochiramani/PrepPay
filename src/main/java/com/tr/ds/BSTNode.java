@@ -4,6 +4,7 @@ public class BSTNode {
     private int value;
     private BSTNode left;
     private BSTNode right;
+    private int order;
 
     public int getValue() {
         return value;
@@ -27,5 +28,13 @@ public class BSTNode {
 
     public void setRight(BSTNode right) {
         this.right = right;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }
