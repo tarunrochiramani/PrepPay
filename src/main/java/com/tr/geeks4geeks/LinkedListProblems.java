@@ -1,9 +1,15 @@
 package com.tr.geeks4geeks;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 import com.tr.ds.LinkedListNode;
+import com.tr.ds.services.LinkedListService;
 import com.tr.exceptions.InvalidInputException;
 
 public class LinkedListProblems {
+    LinkedListService linkedListService = new LinkedListService();
 
     public LinkedListNode<Integer> mergeAtAlternatePos(LinkedListNode<Integer> listA, LinkedListNode<Integer> listB) throws InvalidInputException {
         if (listA == null) {
@@ -34,5 +40,55 @@ public class LinkedListProblems {
         }
 
         return currentB;
+    }
+
+    public<T> LinkedListNode<T> createUnion(LinkedListNode<T> listA, LinkedListNode<T> listB) throws InvalidInputException {
+        if (listA == null && listB == null) {
+            throw new InvalidInputException();
+        }
+        if (listA == null) {
+            return listB;
+        }
+        if (listB == null) {
+            return listA;
+        }
+
+        Set<T> myStorage = new HashSet<T>();
+        LinkedListNode<T> current = listA;
+        while (current != null) {
+            myStorage.add(current.getData());
+            current = current.getNext();
+        }
+
+        current = listB;
+        while (current != null) {
+            myStorage.add(current.getData());
+            current = current.getNext();
+        }
+
+        return linkedListService.create(myStorage.toArray());
+    }
+
+    public<T> LinkedListNode<T> createIntersection(LinkedListNode<T> listA, LinkedListNode<T> listB) throws InvalidInputException {
+        if (listA == null || listB == null) {
+            throw new InvalidInputException();
+        }
+
+        Set<T> myStorage = new HashSet<T>();
+        LinkedListNode<T> current = listA;
+        while (current != null) {
+            myStorage.add(current.getData());
+            current = current.getNext();
+        }
+
+        current = listB;
+        while (current != null) {
+            if (!myStorage.contains(current.getData())) {
+                myStorage.remove(current.getData());
+            }
+            current = current.getNext();
+        }
+
+        return linkedListService.create(myStorage.toArray());
     }
 }

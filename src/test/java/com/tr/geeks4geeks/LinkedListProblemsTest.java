@@ -62,6 +62,34 @@ public class LinkedListProblemsTest {
         validateMergedList(newList2Head, new Integer[] {6, 8});
     }
 
+    @Test
+    public void canGetUnion() throws InvalidInputException {
+        Integer[] input1 = new Integer[] {1, 3};
+        LinkedListNode list1 = linkedListService.create(input1);
+
+        Integer[] input2 = new Integer[] {2, 3, 6, 1};
+        LinkedListNode list2 = linkedListService.create(input2);
+
+        LinkedListNode union = linkedListProblems.createUnion(list1, list2);
+
+        assertNotNull(union);
+        validateMergedList(union, new Integer[] {1, 2, 3, 6});
+    }
+
+    @Test
+    public void canGetIntersection() throws InvalidInputException {
+        Integer[] input1 = new Integer[] {1, 3};
+        LinkedListNode list1 = linkedListService.create(input1);
+
+        Integer[] input2 = new Integer[] {2, 3, 6, 1};
+        LinkedListNode list2 = linkedListService.create(input2);
+
+        LinkedListNode union = linkedListProblems.createIntersection(list1, list2);
+
+        assertNotNull(union);
+        validateMergedList(union, new Integer[] {1, 3});
+    }
+
     private void validateMergedList(LinkedListNode list1, Integer[] expectedDataValues) {
         List<Integer> list1Values = new ArrayList<Integer>();
 
