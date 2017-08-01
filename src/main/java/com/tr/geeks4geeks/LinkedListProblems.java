@@ -91,4 +91,41 @@ public class LinkedListProblems {
 
         return linkedListService.create(myStorage.toArray());
     }
+
+    public <T extends Comparable> LinkedListNode<T> sortedMerge(LinkedListNode<T> listA, LinkedListNode<T> listB) throws InvalidInputException {
+        if (listA == null && listB == null) {
+            throw new InvalidInputException();
+        }
+
+        if (listA == null) {
+            return listB;
+        }
+
+        if (listB == null) {
+            return listA;
+        }
+
+        LinkedListNode<T> currentA=listA, nextA, previousA=null;
+        LinkedListNode<T> currentB=listB, nextB;
+
+        while(currentA!=null && currentB!=null) {
+            nextA = currentA.getNext();
+            nextB = currentB.getNext();
+
+            if (nextA == null || nextA.getData().compareTo(currentB.getData()) > 0) {
+                currentA.setNext(currentB);
+                currentB.setNext(nextA);
+                currentB = nextB;
+            }
+
+            previousA = currentA;
+            currentA = currentA.getNext();
+        }
+
+        if (currentB != null) {
+            previousA.setNext(currentB);
+        }
+
+        return listA;
+    }
 }

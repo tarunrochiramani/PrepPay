@@ -90,6 +90,48 @@ public class LinkedListProblemsTest {
         validateMergedList(union, new Integer[] {1, 3});
     }
 
+    @Test
+    public void canDoSortedMergeWithEqualLengths() throws InvalidInputException {
+        Integer[] input1 = new Integer[] {1, 3, 5};
+        LinkedListNode list1 = linkedListService.create(input1);
+
+        Integer[] input2 = new Integer[] {2, 4, 6};
+        LinkedListNode list2 = linkedListService.create(input2);
+
+        LinkedListNode sortedList = linkedListProblems.sortedMerge(list1, list2);
+
+        assertNotNull(sortedList);
+        validateMergedList(sortedList, new Integer[] {1, 2, 3, 4, 5, 6});
+    }
+
+    @Test
+    public void canDoSortedMergeWithListAShorter() throws InvalidInputException {
+        Integer[] input1 = new Integer[] {1, 3};
+        LinkedListNode list1 = linkedListService.create(input1);
+
+        Integer[] input2 = new Integer[] {2, 4, 6};
+        LinkedListNode list2 = linkedListService.create(input2);
+
+        LinkedListNode sortedList = linkedListProblems.sortedMerge(list1, list2);
+
+        assertNotNull(sortedList);
+        validateMergedList(sortedList, new Integer[] {1, 2, 3, 4, 6});
+    }
+
+    @Test
+    public void canDoSortedMergeWithListBShorter() throws InvalidInputException {
+        Integer[] input1 = new Integer[] {1, 3, 5, 6};
+        LinkedListNode list1 = linkedListService.create(input1);
+
+        Integer[] input2 = new Integer[] {2, 4};
+        LinkedListNode list2 = linkedListService.create(input2);
+
+        LinkedListNode sortedList = linkedListProblems.sortedMerge(list1, list2);
+
+        assertNotNull(sortedList);
+        validateMergedList(sortedList, new Integer[] {1, 2, 3, 4, 5, 6});
+    }
+
     private void validateMergedList(LinkedListNode list1, Integer[] expectedDataValues) {
         List<Integer> list1Values = new ArrayList<Integer>();
 
