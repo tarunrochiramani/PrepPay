@@ -310,4 +310,27 @@ public class BSTService {
 
         return leftsAreSame & rightsAreSame;
     }
+
+    public BSTNode lowestCommonAncestor(BSTNode root, BSTNode a, BSTNode b) throws InvalidInputException {
+        if (root == null || a == null || b == null) {
+            throw new InvalidInputException();
+        }
+
+        if (root.getLeft() == null && root.getRight() == null) {
+            return null;
+        }
+
+        if (root.getValue() == a.getValue() && root.getValue() == b.getValue()) {
+            return root;
+        }
+
+        if (a.getValue() < root.getValue() && b.getValue() < root.getValue()) {
+            return lowestCommonAncestor(root.getLeft(), a, b);
+        } else if (a.getValue() > root.getValue() && b.getValue() > root.getValue()) {
+            return lowestCommonAncestor(root.getRight(), a, b);
+        } else {
+
+        }
+        return null;
+    }
 }
