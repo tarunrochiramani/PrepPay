@@ -12,13 +12,10 @@ public class PalindromePermutation {
             checker ^= (1 << c - 'a');
         }
 
-        if (checker == 0) {
+        if (checker == 0 || (checker & (checker - 1)) == 0) {
             return true;
         }
 
-        if ((checker & -checker) == checker) {
-            return true;
-        }
         return false;
     }
 }
