@@ -18,7 +18,7 @@ public class MyAnagramGrouper implements Comparator<String> {
         Integer checker = 0;
         char[] chars = str.toLowerCase().toCharArray();
         for (char c : chars) {
-            checker |= (c - 'a');
+            checker ^= (1 << c - 'a');
         }
         return checker;
     }
