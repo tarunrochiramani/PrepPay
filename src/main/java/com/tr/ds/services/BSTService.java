@@ -10,7 +10,6 @@ import com.tr.ds.BSTNode;
 import com.tr.exceptions.InvalidInputException;
 
 public class BSTService {
-    private Random random = new Random();
 
     public BSTNode createTree(int[] values) throws InvalidInputException {
         BSTNode head = null;

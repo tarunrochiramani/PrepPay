@@ -151,27 +151,6 @@ public class BSTServiceTest {
         assertFalse(allBSTSequences.isEmpty());
     }
 
-    @Test
-    public void canGetRandomNode() throws InvalidInputException {
-        int[] values = new int[] {7, 3, 9, 2, 4, 8, 10, 5 ,1};
-        BSTNode root = service.createTree(values);
-
-        BSTNode randomNode1 = service.getRandomNode(root);
-        BSTNode randomNode2 = service.getRandomNode(root);
-        BSTNode randomNode3 = service.getRandomNode(root);
-        BSTNode randomNode4 = service.getRandomNode(root);
-
-        assertNotNull(randomNode1);
-        assertNotNull(randomNode2);
-        assertNotNull(randomNode3);
-        assertNotNull(randomNode4);
-        assertNotEquals(randomNode1, randomNode2);
-        assertNotEquals(randomNode4, randomNode3);
-        assertNotEquals(randomNode2, randomNode4);
-        assertNotEquals(randomNode3, randomNode1);
-    }
-
-
     private int assertIsBST(BSTNode root) {
         int countOfNodes = 0;
         if (root == null) {
