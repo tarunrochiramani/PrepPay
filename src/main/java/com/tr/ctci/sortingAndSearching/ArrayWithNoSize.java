@@ -1,4 +1,4 @@
-package com.tr.ctci.sorting;
+package com.tr.ctci.sortingAndSearching;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.tr.ctci.sorting;
+package com.tr.ctci.sortingAndSearching;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
