@@ -7,26 +7,31 @@ import java.util.Map;
 import java.util.Random;
 
 import com.tr.ds.BSTNode;
+import com.tr.ds.BSTRankNode;
 import com.tr.exceptions.InvalidInputException;
 
 public class BSTService {
 
     public BSTNode createTree(int[] values) throws InvalidInputException {
+        return createTree(values, false);
+    }
+
+    public BSTNode createTree(int[] values, boolean withRank) throws InvalidInputException {
         BSTNode head = null;
 
         for(int value : values) {
             if (head == null) {
-                head = new BSTNode();
+                head = new BSTRankNode();
                 head.setValue(value);
             } else {
-                append(head, value);
+                append(head, value, withRank);
             }
         }
 
         return head;
     }
 
-    public void append(BSTNode head, int value) throws InvalidInputException {
+    public void append(BSTNode head, int value, boolean withRank) throws InvalidInputException {
         if (head == null) {
             throw new InvalidInputException();
         }
@@ -35,13 +40,17 @@ public class BSTService {
         while (current != null) {
             previous = current;
             if (value <= current.getValue()) {
+                if (withRank) {
+                    int rank = ((BSTRankNode) current).getRank();
+                    ((BSTRankNode)current).setRank(rank + 1);
+                }
                 current = current.getLeft();
             } else {
                 current = current.getRight();
             }
         }
 
-        BSTNode newNode = new BSTNode();
+        BSTNode newNode = new BSTRankNode();
         newNode.setValue(value);
 
 
@@ -50,6 +59,30 @@ public class BSTService {
         } else {
             previous.setRight(newNode);
         }
+    }
+
+    public int getRankOfNode(BSTNode root, int dataValue) {
+        int rank = 0;
+        if (root == null) {
+            return rank;
+        }
+
+        BSTNode current = root;
+        while (current != null) {
+            if (current.getValue() == dataValue) {
+                rank = ((BSTRankNode)current).getRank() + 1;
+                break;
+            }
+
+            if (dataValue < current.getValue()) {
+                current = current.getLeft();
+            } else {
+                current = current.getRight();
+            }
+
+        }
+
+        return rank;
     }
 
     public int maxDepth(BSTNode treenode) {

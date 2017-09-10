@@ -151,6 +151,15 @@ public class BSTServiceTest {
         assertFalse(allBSTSequences.isEmpty());
     }
 
+    @Test
+    public void canGetRankOfNode() throws InvalidInputException {
+        int[] values = new int[] {20, 15, 10, 13, 5, 25, 23, 24};
+        BSTNode root = service.createTree(values, true);
+
+        assertEquals(3, service.getRankOfNode(root, 25));
+
+    }
+
     private int assertIsBST(BSTNode root) {
         int countOfNodes = 0;
         if (root == null) {
