@@ -10,7 +10,7 @@ public class MyRunnableTest {
     @Test
     public void canInvokeRun() {
         MyRunnable myRunnable = new MyRunnable();
-        Thread t = new Thread(myRunnable);
+        Thread t = new Thread(myRunnable, "innerThread");
         t.start();
         System.out.println("canInvokeMyRun - " + t.getName());
     }
