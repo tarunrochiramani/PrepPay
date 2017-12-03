@@ -17,5 +17,6 @@ public class ReverseIntTest {
         assertEquals(123, reverseInt.reverse(321));
         assertEquals(-123, reverseInt.reverse(-321));
         assertEquals(1, reverseInt.reverse(1));
+        assertEquals(21, reverseInt.reverse(120));
     }
 }
