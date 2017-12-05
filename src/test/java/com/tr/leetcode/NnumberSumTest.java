@@ -1,10 +1,7 @@
 package com.tr.leetcode;
 
-import java.util.Arrays;
 import java.util.List;
 
-import javafx.util.Pair;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -13,8 +10,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(JUnit4.class)
-public class ThreeSumTest {
-    ThreeSum sum = new ThreeSum();
+public class NnumberSumTest {
+    NnumberSum sum = new NnumberSum();
 
     @Test
     public void canGetThreeNumsWithGivenSum() {
@@ -22,7 +19,13 @@ public class ThreeSumTest {
 
         assertNotNull(result);
         assertFalse(result.isEmpty());
+    }
 
+    @Test
+    public void canGetFourNumsWithGivenSum() {
+        List<List<Integer>> result = sum.getFourNumbersWithGivenSum(new int[]{1, 0, -1, 0, -2, 2}, 0);
 
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
     }
 }
