@@ -49,4 +49,12 @@ public class HexGridTest {
         assertFalse(adjacentTiles.isEmpty());
         assertArrayEquals(new Integer[] {-1, -1, -1, 16, 13, 12}, adjacentTiles.toArray(new Integer[6]));
     }
+
+    @Test
+    public void canGetAdjacentTiles_3() {
+        List<Integer> adjacentTiles = hexGrid.getAdjacentTiles(1);
+        assertNotNull(adjacentTiles);
+        assertFalse(adjacentTiles.isEmpty());
+        assertArrayEquals(new Integer[] {0, 3, 4, 2, -1, -1}, adjacentTiles.toArray(new Integer[6]));
+    }
 }
