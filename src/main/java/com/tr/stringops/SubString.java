@@ -1,10 +1,9 @@
 package com.tr.stringops;
 
 import com.tr.exceptions.InvalidInputException;
-import sun.jvm.hotspot.jdi.IntegerValueImpl;
 
 public class SubString {
-    private static int PRIME = 3;
+    private static int PRIME = 31;
 
     public boolean isSubstringBruteForce(String s1, String s2) {
         if (s1 == null || s2 == null) {

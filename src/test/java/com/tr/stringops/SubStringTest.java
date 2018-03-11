@@ -76,7 +76,11 @@ public class SubStringTest {
     @Test
     public void canCheckRabinKarpSubStringSearch() throws InvalidInputException {
         assertTrue(subString.rabinKarpSubStringSearch("watermelon", "mel"));
+        assertTrue(subString.rabinKarpSubStringSearch("ababababaccababacd", "babacd"));
+        assertFalse(subString.rabinKarpSubStringSearch("ababababaccababacd", "babace"));
     }
+
+
 
 
 }
