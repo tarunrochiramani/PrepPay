@@ -1,8 +1,10 @@
 package com.tr.stringops;
 
 import com.tr.exceptions.InvalidInputException;
+import sun.jvm.hotspot.jdi.IntegerValueImpl;
 
 public class SubString {
+    private static int PRIME = 3;
 
     public boolean isSubstringBruteForce(String s1, String s2) {
         if (s1 == null || s2 == null) {
@@ -74,5 +76,60 @@ public class SubString {
         }
 
         return -1;
+    }
+
+    public boolean rabinKarpSubStringSearch(String text, String pattern) throws InvalidInputException {
+        if (text == null || pattern == null) {
+            throw new InvalidInputException();
+        }
+
+        if (pattern.length() > text.length()) {
+            throw new InvalidInputException();
+        }
+
+        int patternHashValue = getHashCode(pattern);
+        int textHashValue = 0;
+
+        for (int pos=0; pos <=text.length()-pattern.length(); pos++) {
+            textHashValue = getRollingHashCode(text, textHashValue, pos, pattern.length());
+            if (textHashValue == patternHashValue) {
+                int count = 0;
+                String textSubString = text.substring(pos, pos+pattern.length());
+                while (count < pattern.length()) {
+                    if (textSubString.charAt(count) != pattern.charAt(count)) {
+                        break;
+                    }
+                    count++;
+                }
+
+                if (count == pattern.length()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private int getRollingHashCode(String text, int originalHashCode, int start_index, int length) {
+        if (originalHashCode == 0) {
+            return getHashCode(text.substring(start_index, length));
+        }
+
+        originalHashCode = originalHashCode - (Double.valueOf(Math.pow(PRIME, length-1)).intValue() * text.charAt(start_index -1));
+        originalHashCode *=PRIME;
+        originalHashCode += text.charAt(start_index + length -1);
+
+        return originalHashCode;
+    }
+
+    private int getHashCode(String input) {
+        int hashValue = 0;
+
+        for (Character aChar : input.toCharArray()) {
+            hashValue = (PRIME * hashValue) + aChar;
+        }
+
+        return hashValue;
     }
 }

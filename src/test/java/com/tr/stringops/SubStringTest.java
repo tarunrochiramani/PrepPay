@@ -74,21 +74,8 @@ public class SubStringTest {
     }
 
     @Test
-    public void goo() throws InvalidInputException {
-        int[] string1Prefix = subString.kmpPrefix("atatgoedatgo");
-        int[] string2Prefix = subString.kmpPrefix("aabbab");
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int val : string1Prefix) {
-            stringBuilder.append(val + " ");
-        }
-        StringBuilder stringBuilder2 = new StringBuilder();
-        for (int val : string2Prefix) {
-            stringBuilder2.append(val + " ");
-        }
-        System.out.println(stringBuilder.toString());
-        System.out.println(stringBuilder2.toString());
-
+    public void canCheckRabinKarpSubStringSearch() throws InvalidInputException {
+        assertTrue(subString.rabinKarpSubStringSearch("watermelon", "mel"));
     }
 
 
