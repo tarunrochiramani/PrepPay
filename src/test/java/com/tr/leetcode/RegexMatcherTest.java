@@ -1,7 +1,6 @@
 package com.tr.leetcode;
 
 import com.tr.exceptions.InvalidInputException;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -51,12 +50,16 @@ public class RegexMatcherTest {
         assertTrue(regexMatcher.matchesRegex("ab", ".*"));
         assertTrue(regexMatcher.matchesRegex("aab", "c*a*b"));
         assertTrue(regexMatcher.matchesRegex("acb", "a.b"));
+        assertTrue(regexMatcher.matchesRegex("aaa", "a*aaa"));
+        assertTrue(regexMatcher.matchesRegex("a", "ab*"));
 
         assertFalse(regexMatcher.matchesRegex("aa", "a"));
+        assertFalse(regexMatcher.matchesRegex("aa", "aaa"));
         assertFalse(regexMatcher.matchesRegex("aaa", "aa"));
         assertFalse(regexMatcher.matchesRegex("ab", "a*"));
         assertFalse(regexMatcher.matchesRegex("aaa", "a*b"));
         assertFalse(regexMatcher.matchesRegex("aaa", "a.b"));
+        assertFalse(regexMatcher.matchesRegex("a", "ab*a"));
     }
 
 }

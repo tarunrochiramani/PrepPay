@@ -31,8 +31,37 @@ public class RegexMatcher {
             }
         }
 
-        if (textPos == text.length() && (patternPos == pattern.length() || patternPos+2 == pattern.length())) {
-            return true;
+        if (textPos == text.length()) {
+
+            if (patternPos == pattern.length()) {
+                return true;
+            }
+
+            boolean wildCardOfSameChar = false;
+            if (patternPos+1 < wildcardOccurrences.length && wildcardOccurrences[patternPos+1] == 1 && (pattern.charAt(patternPos) == text.charAt(textPos-1) || pattern.charAt(patternPos) == '.')) {
+                wildCardOfSameChar = true;
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            while(patternPos < pattern.length()) {
+                if (patternPos+1 < wildcardOccurrences.length && wildcardOccurrences[patternPos+1] == 1) {
+                    patternPos+=2;
+                } else {
+                    if (!wildCardOfSameChar) {
+                        return false;
+                    }
+                    if (pattern.charAt(patternPos) == '.') {
+                        stringBuilder.append(pattern.charAt(patternPos));
+                    } else {
+                        stringBuilder.append(pattern.charAt(patternPos));
+                    }
+                    patternPos++;
+                }
+            }
+
+            if (stringBuilder.length() ==0 || text.contains(stringBuilder.toString())) {
+                return true;
+            }
         }
 
         return false;
