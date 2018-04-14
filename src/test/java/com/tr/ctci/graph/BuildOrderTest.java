@@ -24,8 +24,7 @@ public class BuildOrderTest {
         Map<String, List<String>> projectDependencies = new HashMap<>();
         projectDependencies.put("f", Arrays.asList("c", "b", "a"));
         projectDependencies.put("c", Arrays.asList("a"));
-        projectDependencies.put("b", Arrays.asList("a"));
-        projectDependencies.put("b", Arrays.asList("e"));
+        projectDependencies.put("b", Arrays.asList("a", "e"));
         projectDependencies.put("a", Arrays.asList("e"));
         projectDependencies.put("d", Arrays.asList("g"));
 
@@ -33,6 +32,24 @@ public class BuildOrderTest {
 
         assertTrue(buildOrder.length > 0);
         assertArrayEquals(new String[] {"d", "f", "g", "c", "b", "a", "e"}, buildOrder);
+
+    }
+
+    @Test
+    public void canGetReducedBuildOrderWithCyclicGraph() {
+        String[] projects = new String[]{"a", "b", "c", "d", "e", "f", "g"};
+        Map<String, List<String>> projectDependencies = new HashMap<>();
+        projectDependencies.put("f", Arrays.asList("c", "b", "a"));
+        projectDependencies.put("c", Arrays.asList("a"));
+        projectDependencies.put("b", Arrays.asList("a", "e"));
+        projectDependencies.put("a", Arrays.asList("e"));
+        projectDependencies.put("e", Arrays.asList("c"));
+        projectDependencies.put("d", Arrays.asList("g"));
+
+        String[] buildOrder = this.buildOrder.getBuildOrder(projects, projectDependencies);
+
+        assertTrue(buildOrder.length > 0);
+        assertArrayEquals(new String[] {"d", "f", "g", "b"}, buildOrder);
 
     }
 }
