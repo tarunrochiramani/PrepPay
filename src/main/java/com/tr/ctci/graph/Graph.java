@@ -1,19 +1,12 @@
 package com.tr.ctci.graph;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Graph {
-    private List<Project> projects = new ArrayList<>();
-    private Map<String, Project> projectByName = new HashMap<>();
+    private List<Node> nodes = new ArrayList<>();
 
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public Map<String, Project> getProjectByName() {
-        return projectByName;
+    public List<Node> getNodes() {
+        return nodes;
     }
 }

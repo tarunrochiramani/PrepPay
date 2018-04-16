@@ -12,9 +12,9 @@ public class TopologicalSort {
     public String[] getSortedValues(Graph graph) {
         Set<String> visited = new HashSet<>();
         Stack<String> sortedValues = new Stack<>();
-        for (Project aProject : graph.getProjects()) {
-            if (!visited.contains(aProject.getName())) {
-                dfs(aProject, visited, sortedValues);
+        for (Node node : graph.getNodes()) {
+            if (!visited.contains(node.getLabel())) {
+                dfs(node, visited, sortedValues);
             }
         }
 
@@ -27,19 +27,19 @@ public class TopologicalSort {
         return result;
     }
 
-    private void dfs(Project project, Set<String> visited, Stack<String> sortedValues) {
-        if (project.getChildren().isEmpty()) {
-            sortedValues.push(project.getName());
+    private void dfs(Node node, Set<String> visited, Stack<String> sortedValues) {
+        if (node.getNodes().isEmpty()) {
+            sortedValues.push(node.getLabel());
             return;
         }
 
-        for (Project child : project.getChildren()) {
-            if (!visited.contains(child.getName())) {
-                visited.add(child.getName());
+        for (Node child : node.getNodes()) {
+            if (!visited.contains(child.getLabel())) {
+                visited.add(child.getLabel());
                 dfs(child, visited, sortedValues);
             }
         }
-        visited.add(project.getName());
-        sortedValues.push(project.getName());
+        visited.add(node.getLabel());
+        sortedValues.push(node.getLabel());
     }
 }

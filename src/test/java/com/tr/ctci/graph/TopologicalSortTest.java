@@ -1,6 +1,9 @@
 package com.tr.ctci.graph;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +20,6 @@ public class TopologicalSortTest {
     @Test
     public void canGetBuildOrder() {
         Graph graph = createGraph();
-        graphService.addEdge(graph, "f", Arrays.asList("c", "b", "a"));
-        graphService.addEdge(graph,"c", Arrays.asList("a"));
-        graphService.addEdge(graph,"b", Arrays.asList("a", "e"));
-        graphService.addEdge(graph,"a", Arrays.asList("e"));
-        graphService.addEdge(graph,"d", Arrays.asList("g"));
 
         String[] buildOrder = topologicalSort.getSortedValues(graph);
 
@@ -31,9 +29,14 @@ public class TopologicalSortTest {
     }
 
     private Graph createGraph() {
-        String[] projects = new String[]{"a", "b", "c", "d", "e", "f", "g"};
-        Graph graph = graphService.createGraphNodes(projects);
+        String[] vertices = new String[]{"a", "b", "c", "d", "e", "f", "g"};
+        Map<String, List<String>> edges = new HashMap<>();
+        edges.put("f", Arrays.asList("c", "b", "a"));
+        edges.put("c", Arrays.asList("a"));
+        edges.put("b", Arrays.asList("a", "e"));
+        edges.put("a", Arrays.asList("e"));
+        edges.put("d", Arrays.asList("g"));
 
-        return graph;
+        return graphService.createGraph(vertices, edges);
     }
 }
